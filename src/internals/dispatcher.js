@@ -65,7 +65,9 @@ function areHookInputsEqual(
 ) {
   // NOTE: The warnings that are used in ReactPartialRendererHooks are obsolete
   // in a prepass, since these issues will be caught by a subsequent renderer anyway
-  if (prevDeps === null) return false
+  // https://github.com/FormidableLabs/react-ssr-prepass/compare/master...tomkelsey:react-ssr-prepass:master
+  // if (prevDeps === null) return false
+  if (!prevDeps) return false
 
   for (let i = 0; i < prevDeps.length && i < nextDeps.length; i++) {
     if (!is(nextDeps[i], prevDeps[i])) return false
