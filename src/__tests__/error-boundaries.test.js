@@ -174,20 +174,20 @@ it('always returns to the correct error boundary', () => {
     expect(Throw).toHaveBeenCalledTimes(4)
     expect(Inner).toHaveBeenCalledTimes(4)
     expect(values).toMatchInlineSnapshot(`
-      Array [
-        Object {
+      [
+        {
           "depth": 1,
           "value": "1",
         },
-        Object {
+        {
           "depth": 2,
           "value": "2",
         },
-        Object {
+        {
           "depth": 3,
           "value": "3",
         },
-        Object {
+        {
           "depth": 4,
           "value": "4",
         },
