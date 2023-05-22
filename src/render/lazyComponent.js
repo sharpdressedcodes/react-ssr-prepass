@@ -64,7 +64,8 @@ const render = (
   // so create the element with passed props and return it
   const payload = ((type._payload || type: any): LazyComponentPayload)
   if (payload._status === 1) {
-    return createElement(payload._result, props)
+    // return createElement(payload._result, props)
+    return createElement(payload._result.default || payload._result, props)
   }
 
   return null

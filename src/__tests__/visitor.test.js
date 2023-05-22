@@ -142,7 +142,7 @@ describe('visitElement', () => {
 
     const Test = React.lazy(defer)
     const queue = []
-    const children = visitElement(<Test />, queue, () => {})
+    const children = visitElement(<Test />, queue, () => {}, true)
 
     expect(children.length).toBe(0)
     expect(queue.length).toBe(1)

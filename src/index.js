@@ -29,7 +29,8 @@ import {
 const flushFrames = (
   queue: Frame[],
   visitor: Visitor,
-  state: RendererState
+  state: RendererState,
+  mountLazy: boolean
 ): Promise<void> => {
   const frame = queue.shift()
   if (!frame) {
@@ -45,20 +46,20 @@ const flushFrames = (
   return Promise.resolve(frame.thenable).then(
     () => {
       setCurrentRendererState(state)
-      update(frame, queue, visitor)
-      return flushFrames(queue, visitor, state)
+      update(frame, queue, visitor, mountLazy)
+      return flushFrames(queue, visitor, state, mountLazy)
     },
     (error: Error) => {
       if (!frame.errorFrame) throw error
       frame.errorFrame.error = error
-      update(frame.errorFrame, queue, visitor)
+      update(frame.errorFrame, queue, visitor, mountLazy)
     }
   )
 }
 
 const defaultVisitor = () => undefined
 
-const renderPrepass = (element: Node, visitor?: Visitor): Promise<void> => {
+const renderPrepass = (element: Node, visitor?: Visitor, mountLazy?: boolean): Promise<void> => {
   if (!visitor) visitor = defaultVisitor
 
   const queue: Frame[] = []
@@ -74,12 +75,12 @@ const renderPrepass = (element: Node, visitor?: Visitor): Promise<void> => {
   setCurrentErrorFrame(null)
 
   try {
-    visit(getChildrenArray(element), queue, visitor)
+    visit(getChildrenArray(element), queue, visitor, Boolean(mountLazy))
   } catch (error) {
     return Promise.reject(error)
   }
 
-  return flushFrames(queue, visitor, state)
+  return flushFrames(queue, visitor, state, Boolean(mountLazy))
 }
 
 export default renderPrepass

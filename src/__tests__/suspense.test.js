@@ -396,7 +396,7 @@ describe('renderPrepass', () => {
       // Initially React sets the lazy component's status to -1
       expect(Outer._payload._status).toBe(-1 /* INITIAL */)
 
-      const render$ = renderPrepass(<Outer value={value} />)
+      const render$ = renderPrepass(<Outer value={value} />, undefined, true)
 
       // We've synchronously walked the tree and expect a suspense
       // queue to have now built up
@@ -420,7 +420,7 @@ describe('renderPrepass', () => {
       const Inner = jest.fn(() => null)
       const loadInner = jest.fn().mockResolvedValueOnce({ default: Inner })
       const Outer = React.lazy(loadInner)
-      const render$ = renderPrepass(<Outer />)
+      const render$ = renderPrepass(<Outer />, undefined, true)
 
       expect(Inner).not.toHaveBeenCalled()
       expect(loadInner).toHaveBeenCalledTimes(1)
@@ -435,7 +435,7 @@ describe('renderPrepass', () => {
     it('supports skipping invalid components', () => {
       const loadInner = jest.fn().mockResolvedValueOnce({})
       const Outer = React.lazy(loadInner)
-      const render$ = renderPrepass(<Outer />)
+      const render$ = renderPrepass(<Outer />, undefined, true)
 
       expect(loadInner).toHaveBeenCalledTimes(1)
       expect(Outer._payload._status).toBe(0 /* PENDING */)
@@ -453,7 +453,7 @@ describe('renderPrepass', () => {
       Outer._payload._status = 1 /* SUCCESSFUL */
       Outer._payload._result = Inner /* SUCCESSFUL */
 
-      renderPrepass(<Outer />)
+      renderPrepass(<Outer />, undefined, true)
 
       expect(loadInner).toHaveBeenCalledTimes(0)
       expect(Inner).toHaveBeenCalled()

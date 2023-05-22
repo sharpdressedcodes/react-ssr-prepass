@@ -65,7 +65,9 @@ function areHookInputsEqual(
 ) {
   // NOTE: The warnings that are used in ReactPartialRendererHooks are obsolete
   // in a prepass, since these issues will be caught by a subsequent renderer anyway
-  if (prevDeps === null) return false
+  // https://github.com/FormidableLabs/react-ssr-prepass/compare/master...tomkelsey:react-ssr-prepass:master
+  // if (prevDeps === null) return false
+  if (!prevDeps) return false
 
   for (let i = 0; i < prevDeps.length && i < nextDeps.length; i++) {
     if (!is(nextDeps[i], prevDeps[i])) return false
@@ -351,9 +353,11 @@ export const Dispatcher = {
   useId: useOpaqueIdentifier,
   unstable_useId: useOpaqueIdentifier,
   unstable_useOpaqueIdentifier: useOpaqueIdentifier,
-  // ignore useLayout effect completely as usage of it will be caught
+  // https://github.com/FormidableLabs/react-ssr-prepass/compare/master...HelloPareto:react-ssr-prepass:master
+  // ignore useLayout/useInsertion effect completely as usage of it will be caught
   // in a subsequent render pass
   useLayoutEffect: noop,
+  useInsertionEffect: noop,
   // useImperativeHandle is not run in the server environment
   useImperativeHandle: noop,
   // Effects are not run in the server environment.

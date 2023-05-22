@@ -33,7 +33,8 @@ export type ComponentStatics = {
   contextType?: AbstractContext,
   contextTypes?: Object,
   childContextTypes?: Object,
-  defaultProps?: Object
+  defaultProps?: Object,
+  default?: Object
 }
 
 /** <Context.Consumer> */
