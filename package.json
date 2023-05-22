@@ -1,15 +1,19 @@
 {
-  "name": "react-ssr-prepass",
-  "version": "1.4.0",
+  "name": "@sharpdressedcodes/react-ssr-prepass",
+  "version": "1.6.0",
   "description": "A custom partial React SSR renderer for prefetching and suspense",
   "main": "dist/react-ssr-prepass.js",
   "module": "dist/react-ssr-prepass.es.js",
   "types": "dist/react-ssr-prepass.d.ts",
   "author": "Phil Plückthun <phil.pluckthun@formidable.com>",
   "license": "MIT",
-  "repository": "git@github.com:FormidableLabs/react-ssr-prepass.git",
+  "homepage": "https://github.com/sharpdressedcodes/react-ssr-prepass#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/sharpdressedcodes/react-ssr-prepass.git"
+  },
   "bugs": {
-    "url": "https://github.com/FormidableLabs/react-ssr-prepass/issues"
+    "url": "https://github.com/sharpdressedcodes/react-ssr-prepass/issues"
   },
   "files": [
     "dist"

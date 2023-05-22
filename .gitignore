@@ -1,7 +1,9 @@
-node_modules
+.idea
 .vscode
+node_modules
+dist
+coverage
+
 yarn-error.log*
 package-lock.json
-dist
 .DS_Store
-coverage
